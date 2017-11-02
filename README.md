@@ -1,6 +1,6 @@
 # React Template
 
-This is a template created for developing personal projects using React.
+This is a template created for developing projects using React.
 
 Template key features:
 
