@@ -2,17 +2,24 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
+const paths = {
+  SRC: path.resolve(__dirname, 'src'),
+};
+
 // List of libraries that must be loaded
 // in the vendors.js file
 const VENDOR_LIBS = [
   'react',
   'react-dom',
+  'redux',
+  'redux-saga',
+  'react-redux',
 ];
 
 
 const config = {
   entry: {
-    bundle: 'src/index.js',
+    bundle: path.resolve(__dirname, 'src/index.js'),
     vendor: VENDOR_LIBS,
   },
   output: {
@@ -28,6 +35,21 @@ const config = {
       },
     ],
   },
+  devServer: {
+    port: 3000,
+    inline: true,
+    open: true,
+  },
+  resolve: {
+    alias: {
+      components: path.resolve(paths.SRC, 'components'),
+      containers: path.resolve(paths.SRC, 'containers'),
+      reducers: path.resolve(paths.SRC, 'reducers'),
+      actions: path.resolve(paths.SRC, 'actions'),
+      sagas: path.resolve(paths.SRC, 'sagas'),
+    },
+  },
+  devtool: 'cheap-module-source-map',
   plugins: [
   // Generate index.html
     new HtmlWebpackPlugin({

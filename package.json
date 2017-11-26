@@ -4,9 +4,12 @@
   "description": "Template for creating react projects with babel and linter support.",
   "main": "src/index.js",
   "scripts": {
-    "build": "rimraf build && webpack",
-    "start": "webpack-dev-server",
-    "lint": "eslint --ext .js src/"
+    "build": "rimraf build && cross-env NODE_ENV=production webpack",
+    "start": "cross-env NODE_ENV=development webpack-dev-server -d",
+    "lint": "eslint --ext .js src/",
+    "test": "cross-env NODE_ENV=test mocha --require babel-register ./src/**/*test.js --reporter spec||exit 0",
+    "test:watch": "cross-env NODE_ENV=test mocha -w --require babel-register ./src/**/*test.js --reporter spec||exit 0",
+    "validate": "npm-run-all --parallel lint test"
   },
   "license": "MIT",
   "keywords": [
@@ -16,22 +19,40 @@
   "dependencies": {
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.2",
     "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-plugin-transform-react-constant-elements": "^6.23.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.10",
+    "babel-plugin-transform-replace-object-assign": "^0.2.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "chai": "^4.1.2",
     "cross-env": "^5.1.1",
     "eslint": "^4.10.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-loader": "^1.9.0",
+    "eslint-plugin-chai-friendly": "^0.4.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-mocha": "^4.11.0",
     "eslint-plugin-react": "^7.4.0",
     "html-webpack-plugin": "^2.30.1",
+    "mocha": "^4.0.1",
+    "npm-run-parallel": "^0.6.0",
     "rimraf": "^2.6.2",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3"

@@ -7,5 +7,17 @@
     "globals": {
         "document": true,
         "window": true
-    }
+    },
+    "parser": "babel-eslint",
+    "settings": {
+        "import/resolver": {
+            "webpack": {
+                "config": "webpack.config.js"
+            }
+        }
+    },
+    "plugins": [
+        "mocha",
+        "chai-friendly"
+    ]
 }
